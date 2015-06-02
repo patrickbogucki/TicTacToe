@@ -91,4 +91,35 @@ body {
 	border-right: 4px solid #854568;
 }
 
-// 
+// Game pieces - X and O
+.piece-x {
+	background: #FFFFFF;
+	height: 100px;
+	position: relative;
+	left: 45px;
+	width: 10px;
+	-ms-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+.piece-x:after {
+	background: #FFFFFF;
+	content: "";
+	height: 10px;
+	position: absolute;
+	left: -45px;
+	top: 45px;
+	width: 100px;
+}
+
+.piece-o {
+	width: 60px;
+	height: 60px;
+	// background: red;
+	-moz-border-radius: 100px;
+	-webkit-border-radius: 100px;
+	border-radius: 100px;
+	border: 10px solid #FFFFFF;
+	margin: 10px;
+}
