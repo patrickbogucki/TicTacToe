@@ -83,4 +83,5 @@ body {
   color: red; }
 
 .alert-message {
-  display: none; }
+  display: none;
+  font-weight: 400; }
