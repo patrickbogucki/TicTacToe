@@ -1,0 +1,48 @@
+body {
+  background-color: #232323;
+  color: #6287A4;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300; }
+
+.container {
+  text-align: center;
+  min-width: 600px; }
+
+.scoreboard {
+  margin-bottom: 30px; }
+  .scoreboard ul {
+    list-style: none;
+    display: inline-block;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-top: 4px double;
+    border-bottom: 4px double; }
+    .scoreboard ul li {
+      display: inline-block;
+      width: 70px; }
+
+.gameTitle {
+  margin-left: 20px;
+  margin-right: 20px; }
+
+.row {
+  display: inline-block;
+  width: 100%; }
+
+.cell {
+  width: 100px;
+  height: 100px;
+  margin: -2px;
+  display: inline-block; }
+
+.mid-l, .mid-c, .mid-r, .bot-l, .bot-c, .bot-r {
+  border-top: 4px solid #854568; }
+
+.top-l, .top-c, .top-r, .mid-l, .mid-c, .mid-r {
+  border-bottom: 4px solid #854568; }
+
+.top-c, .top-r, .mid-c, .mid-r, .bot-c, .bot-r {
+  border-left: 4px solid #854568; }
+
+.top-l, .top-c, .mid-l, .mid-c, .bot-l, .bot-c {
+  border-right: 4px solid #854568; }
