@@ -32,6 +32,7 @@ body {
 }
 
 .gameTitle {
+	width: auto;
 	margin-left: 20px;
 	margin-right: 20px;
 }
@@ -101,6 +102,7 @@ body {
 	-ms-transform: rotate(45deg);
 	-webkit-transform: rotate(45deg);
 	transform: rotate(45deg);
+	display: none;
 }
 
 .piece-x:after {
@@ -122,4 +124,14 @@ body {
 	border-radius: 100px;
 	border: 10px solid #FFFFFF;
 	margin: 10px;
+	display: none;
+}
+
+.alert {
+	margin-top: 20px;
+	color: red;
+}
+
+.alert-message {
+	display: none;
 }
