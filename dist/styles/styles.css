@@ -21,6 +21,9 @@ body {
       display: inline-block;
       width: 70px; }
 
+.playerHeader {
+  font-weight: 400; }
+
 .gameTitle {
   width: auto;
   margin-left: 20px;
