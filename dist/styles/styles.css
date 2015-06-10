@@ -5,8 +5,7 @@ body {
   font-weight: 300; }
 
 .container {
-  text-align: center;
-  min-width: 600px; }
+  text-align: center; }
 
 .scoreboard {
   margin-bottom: 30px; }
@@ -29,9 +28,23 @@ body {
   margin-left: 20px;
   margin-right: 20px; }
 
+.gameboard {
+  width: 400px;
+  display: inline-block; }
+
 .row {
   display: inline-block;
-  width: 100%; }
+  position: relative; }
+
+.line {
+  background: #B6DBFF;
+  content: "";
+  height: 10px;
+  position: absolute;
+  left: 0%;
+  top: 50%;
+  width: 0%;
+  margin-top: -5px; }
 
 .cell {
   width: 100px;

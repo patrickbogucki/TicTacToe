@@ -35,7 +35,16 @@ function main() {
 
 				drawPiece(clickedCell, currentPiece);
 
-				game.checkGameForWin(rowIndex, colIndex);
+				if(game.scanRowWin(rowIndex, currentPiece)) {
+					drawHorizontalLine(rowIndex + 1);
+				}
+				else if(game.scanColWin(colIndex, currentPiece)) {
+					drawHorizontalLine(colIndex);
+				}
+
+				// game.checkGameForWin(rowIndex, colIndex, currentPiece);
+
+				toggleCurrentPiece();
 			}
 		}		
 	});
@@ -55,7 +64,19 @@ function main() {
 		cell.find('.piece-' + pieceSymbol).fadeIn('slow', function() {
 			appeared = true;
 		});
+	}
+
+	function drawHorizontalLine(row) {
+		$('.row:nth-of-type(' + row + ')').append('<div class="line"></div>');
+		var line = $('.row').find('.line');
+		line. animate({width: "100%"}, 2000);
+	}
+
+	function drawVerticalLine(col) {
 		
+	}
+
+	function toggleCurrentPiece() {
 		if(currentPiece === pieceX) {
 			currentPiece = pieceO;
 			$('.playerHeader').css('font-weight', 300);
@@ -99,16 +120,44 @@ Game.prototype.cellContainsPiece = function(row, col) {
 	return (this.boardArray[row][col] !== null);
 };
 
-Game.prototype.checkGameForWin = function(row, col) {
+Game.prototype.checkGameForWin = function(row, col, currentPiece) {
 	console.log("Checking if last move was a win");
-	for(var i = 0; i < this.boardArray.length; i++) {
-		for(var j = 0; j < this.boardArray[i].length; j++) {
-			if(this.boardArray[i][j] === null) {
-				return false;
-			}
+	
+
+	// for(var i = 0; i < this.boardArray.length; i++) {
+	// 	for(var j = 0; j < this.boardArray[i].length; j++) {
+	// 		if(this.boardArray[i][j] === null) {
+	// 			return false;
+	// 		}
+	// 	}
+	// }
+	// this.isGameOver = true;
+
+	if(this.scanRowWin(row, currentPiece) || 
+		this.scanColWin(col, currentPiece)) {
+		this.isGameOver = true;
+	}
+};
+
+Game.prototype.scanRowWin = function(row, currentPiece) {
+	for(var i = 0; i < this.boardArray[row].length; i++) {
+		console.log(this.boardArray[row][i] + ' ' + currentPiece);
+		if(this.boardArray[row][i] !== currentPiece) {
+			return false;
 		}
 	}
 	this.isGameOver = true;
+	return true;
+};
+
+Game.prototype.scanColWin = function(col, currentPiece) {
+	for(var i = 0; i < this.boardArray.length; i++) {
+		if(this.boardArray[i][col] !== currentPiece) {
+			return false;
+		}
+	}
+	this.isGameOver = true;
+	return true;
 };
 
 $(document).ready(main);

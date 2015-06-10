@@ -1,3 +1,14 @@
+//////////////////////////////
+//	Variables
+////////////////////////////
+
+$win-line-height: 10px;
+
+
+//////////////////////////////
+//	Styles
+////////////////////////////
+
 * {
 
 }
@@ -11,7 +22,7 @@ body {
 
 .container {
 	text-align: center;
-	min-width: 600px
+	// min-width: 600px
 }
 
 .scoreboard {
@@ -41,13 +52,30 @@ body {
 	margin-right: 20px;
 }
 
-.gameBoard {
-	
+.gameboard {
+	width: 400px;
+	display: inline-block;
 }
 
 .row {
 	display: inline-block;
-	width: 100%;
+	position: relative;
+	// width: 100%;
+}
+
+.line {
+	background: #B6DBFF;
+	content: "";
+	height: $win-line-height;
+	position: absolute;
+	left: 0%;
+	top: 50%;
+	width: 0%;
+	margin-top: -$win-line-height / 2;
+	// -ms-transform: rotate(45deg);
+	// -webkit-transform: rotate(45deg);
+	// transform: rotate(45deg);
+	// display: none;
 }
 
 .cell {
@@ -130,6 +158,8 @@ body {
 	margin: 10px;
 	display: none;
 }
+
+
 
 .alert {
 	margin-top: 20px;
