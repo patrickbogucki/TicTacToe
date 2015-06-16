@@ -43,7 +43,10 @@ function main() {
 					drawHorizontalLine(rowIndex + 1);
 				}
 				else if(game.scanColWin(colIndex, currentPiece)) {
-					drawVerticalLine(colIndex);
+					drawVerticalLine(colIndex + 1);
+				}
+				else if (game.scanDiagonalWin(rowIndex, colIndex, currentPiece)) {
+					drawDiagonalLine();
 				}
 
 				// game.checkGameForWin(rowIndex, colIndex, currentPiece);
@@ -76,17 +79,16 @@ function main() {
 		horLine.animate({width: "100%"}, 2000);
 	}
 
-	// Columns are zero indexed
 	function drawVerticalLine(col) {
 		var vertLineOffset;
 		console.log('COL:  ' + col);
-		if(col === 0) {
+		if(col === 1) {
 			vertLineOffset = -verticalLinePixelOffset;
 		}
-		else if(col === 1) {
+		else if(col === 2) {
 			vertLineOffset = 0;
 		}
-		else if(col === 2) {
+		else if(col === 3) {
 			vertLineOffset = verticalLinePixelOffset;
 		}
 
@@ -94,6 +96,11 @@ function main() {
 		var vertLine = $('.gameboard').find('.vert-line');
 		vertLine.css("left", vertLineOffset);
 		vertLine.animate({height: "100%"}, 2000);
+	}
+
+	// TODO
+	function drawDiagonalLine() {
+
 	}
 
 	function toggleCurrentPiece() {
@@ -142,17 +149,6 @@ Game.prototype.cellContainsPiece = function(row, col) {
 
 Game.prototype.checkGameForWin = function(row, col, currentPiece) {
 	console.log("Checking if last move was a win");
-	
-
-	// for(var i = 0; i < this.boardArray.length; i++) {
-	// 	for(var j = 0; j < this.boardArray[i].length; j++) {
-	// 		if(this.boardArray[i][j] === null) {
-	// 			return false;
-	// 		}
-	// 	}
-	// }
-	// this.isGameOver = true;
-
 	if(this.scanRowWin(row, currentPiece) || 
 		this.scanColWin(col, currentPiece)) {
 		this.isGameOver = true;
@@ -178,6 +174,37 @@ Game.prototype.scanColWin = function(col, currentPiece) {
 	}
 	this.isGameOver = true;
 	return true;
+};
+
+Game.prototype.scanDiagonalWin = function(row, col, currentPiece) {
+	if(row === 1 && col === 1) {
+		if(this.boardArray[0][0] === currentPiece && this.boardArray[2][2] === currentPiece) {
+			this.isGameOver = true;
+		}
+		else if(this.boardArray[0][2] === currentPiece && this.boardArray[2][0] === currentPiece) {
+			this.isGameOver = true;
+		}
+	}
+	else if(row === 0 && col === 0) {
+		if(this.boardArray[1][1] === currentPiece && this.boardArray[2][2] === currentPiece) {
+			this.isGameOver = true;
+		}
+	}
+	else if(row === 0 && col === 2) {
+		if(this.boardArray[1][1] === currentPiece && this.boardArray[2][0] === currentPiece) {
+			this.isGameOver = true;
+		}
+	}
+	else if(row === 2 && col === 0) {
+		if(this.boardArray[1][1] === currentPiece && this.boardArray[0][2] === currentPiece) {
+			this.isGameOver = true;
+		}
+	}
+	else if(row === 2 && col === 2) {
+		if(this.boardArray[1][1] === currentPiece && this.boardArray[0][0] === currentPiece) {
+			this.isGameOver = true;
+		}
+	}
 };
 
 $(document).ready(main);
