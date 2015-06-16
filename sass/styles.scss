@@ -22,7 +22,7 @@ body {
 
 .container {
 	text-align: center;
-	// min-width: 600px
+	min-width: 600px
 }
 
 .scoreboard {
@@ -53,17 +53,19 @@ body {
 }
 
 .gameboard {
-	width: 400px;
+	width: auto;
 	display: inline-block;
+	position: relative;
+	text-align: center;
 }
 
 .row {
-	display: inline-block;
+	display: block;
 	position: relative;
 	// width: 100%;
 }
 
-.line {
+.hor-line {
 	background: #B6DBFF;
 	content: "";
 	height: $win-line-height;
@@ -78,11 +80,48 @@ body {
 	// display: none;
 }
 
+// //TERRIBLE
+// .line {
+// 	background: #B6DBFF;
+// 	content: "";
+// 	height: $win-line-height;
+// 	position: absolute;
+// 	left: -33.33%;
+// 	top: 150%;
+// 	width: 100%;
+// 	margin-top: -$win-line-height / 2;
+// 	-ms-transform: rotate(90deg);
+// 	-webkit-transform: rotate(90deg);
+// 	transform: rotate(90deg);
+// 	// display: none;
+// }
+
+.vert-line {
+	background: #B6DBFF;
+	content: "";
+	height: 0%;
+	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+	top: 0;
+	width: $win-line-height;
+	// margin-top: -$win-line-height / 2;
+	z-index: 999999;
+	// -ms-transform: rotate(90deg);
+	// -webkit-transform: rotate(90deg);
+	// transform: rotate(90deg);
+	// display: none;
+}
+
+
 .cell {
 	width: 100px;
 	height: 100px;
 	margin: -2px;
 	display: inline-block;
+	position: relative;
 	// background-color: #ADB956;
 }
 

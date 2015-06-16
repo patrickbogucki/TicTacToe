@@ -5,7 +5,8 @@ body {
   font-weight: 300; }
 
 .container {
-  text-align: center; }
+  text-align: center;
+  min-width: 600px; }
 
 .scoreboard {
   margin-bottom: 30px; }
@@ -29,14 +30,16 @@ body {
   margin-right: 20px; }
 
 .gameboard {
-  width: 400px;
-  display: inline-block; }
+  width: auto;
+  display: inline-block;
+  position: relative;
+  text-align: center; }
 
 .row {
-  display: inline-block;
+  display: block;
   position: relative; }
 
-.line {
+.hor-line {
   background: #B6DBFF;
   content: "";
   height: 10px;
@@ -46,11 +49,25 @@ body {
   width: 0%;
   margin-top: -5px; }
 
+.vert-line {
+  background: #B6DBFF;
+  content: "";
+  height: 0%;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  width: 10px;
+  z-index: 999999; }
+
 .cell {
   width: 100px;
   height: 100px;
   margin: -2px;
-  display: inline-block; }
+  display: inline-block;
+  position: relative; }
 
 .mid-l, .mid-c, .mid-r, .bot-l, .bot-c, .bot-r {
   border-top: 4px solid #854568; }

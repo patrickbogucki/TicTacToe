@@ -5,6 +5,8 @@ function main() {
 
 	var currentPiece = pieceX; 	// X starts with first move
 
+	var verticalLinePixelOffset = 216;
+
 	var hasPieceMsg = "There is already a piece there.";
 	var waitMsg = "Please Wait";
 	var gameOverMsg = "Game Over.\nRefresh to play again";
@@ -12,6 +14,8 @@ function main() {
 	var appeared;
 
 	var game = new Game();
+
+	// $('.cell').height($('.cell').width());
 
 	$('.cell').on('click', function() {
 		var clickedCell = $(this);
@@ -39,7 +43,7 @@ function main() {
 					drawHorizontalLine(rowIndex + 1);
 				}
 				else if(game.scanColWin(colIndex, currentPiece)) {
-					drawHorizontalLine(colIndex);
+					drawVerticalLine(colIndex);
 				}
 
 				// game.checkGameForWin(rowIndex, colIndex, currentPiece);
@@ -67,13 +71,29 @@ function main() {
 	}
 
 	function drawHorizontalLine(row) {
-		$('.row:nth-of-type(' + row + ')').append('<div class="line"></div>');
-		var line = $('.row').find('.line');
-		line. animate({width: "100%"}, 2000);
+		$('.row:nth-of-type(' + row + ')').append('<div class="hor-line"></div>');
+		var horLine = $('.row').find('.hor-line');
+		horLine.animate({width: "100%"}, 2000);
 	}
 
+	// Columns are zero indexed
 	function drawVerticalLine(col) {
-		
+		var vertLineOffset;
+		console.log('COL:  ' + col);
+		if(col === 0) {
+			vertLineOffset = -verticalLinePixelOffset;
+		}
+		else if(col === 1) {
+			vertLineOffset = 0;
+		}
+		else if(col === 2) {
+			vertLineOffset = verticalLinePixelOffset;
+		}
+
+		$('.gameboard').append('<div class="vert-line"></div>');
+		var vertLine = $('.gameboard').find('.vert-line');
+		vertLine.css("left", vertLineOffset);
+		vertLine.animate({height: "100%"}, 2000);
 	}
 
 	function toggleCurrentPiece() {
