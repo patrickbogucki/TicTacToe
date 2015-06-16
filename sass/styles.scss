@@ -115,6 +115,23 @@ body {
 	// display: none;
 }
 
+// Diagonal line container used to rotate and prevent change of length of line from moving itself around grid
+.diag-line {
+	  position: absolute;
+	  left: 6px;
+	  top: 0px;
+	  width: 0px;
+	  transform: rotate(45deg); 
+}
+
+// Visible line
+.diag-line:after {
+	  background: #FFFFFF;
+	  content: "";
+	  height: 10px;
+	  position: absolute;
+	  width: 428px; 
+}
 
 .cell {
 	width: 100px;

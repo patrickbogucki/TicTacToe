@@ -100,7 +100,8 @@ function main() {
 
 	// TODO
 	function drawDiagonalLine() {
-
+		// Set line location. Initializes in top left and draws towards bottom right. Check if it should be moved to bottom left and draw to top right.
+		
 	}
 
 	function toggleCurrentPiece() {
