@@ -3,7 +3,7 @@
 ////////////////////////////
 
 $win-line-height: 10px;
-
+$win-line-color: #B6DBFF;
 
 //////////////////////////////
 //	Styles
@@ -66,7 +66,7 @@ body {
 }
 
 .hor-line {
-	background: #B6DBFF;
+	background: $win-line-color;
 	content: "";
 	height: $win-line-height;
 	position: absolute;
@@ -82,7 +82,7 @@ body {
 
 // //TERRIBLE
 // .line {
-// 	background: #B6DBFF;
+// 	background: $win-line-color;
 // 	content: "";
 // 	height: $win-line-height;
 // 	position: absolute;
@@ -97,7 +97,7 @@ body {
 // }
 
 .vert-line {
-	background: #B6DBFF;
+	background: $win-line-color;
 	content: "";
 	height: 0%;
 	position: absolute;
@@ -125,12 +125,12 @@ body {
 }
 
 // Visible line
-.diag-line:after {
-	  background: #FFFFFF;
+.diag-line-after {
+	  background: $win-line-color;
 	  content: "";
 	  height: 10px;
 	  position: absolute;
-	  width: 428px; 
+	  width: 0px; 
 }
 
 .cell {

@@ -46,7 +46,7 @@ function main() {
 					drawVerticalLine(colIndex + 1);
 				}
 				else if (game.scanDiagonalWin(rowIndex, colIndex, currentPiece)) {
-					drawDiagonalLine();
+					drawDiagonalLine(rowIndex + 1, colIndex + 1);
 				}
 
 				// game.checkGameForWin(rowIndex, colIndex, currentPiece);
@@ -98,10 +98,14 @@ function main() {
 		vertLine.animate({height: "100%"}, 2000);
 	}
 
-	// TODO
-	function drawDiagonalLine() {
+	function drawDiagonalLine(row, col) {
 		// Set line location. Initializes in top left and draws towards bottom right. Check if it should be moved to bottom left and draw to top right.
-		
+		$('.gameboard').append('<div class="diag-line"><div class="diag-line-after"></div></div>');
+		if((row === 3 && col === 1) || (row === 1 && col === 3)) {
+			$('.diag-line').css("top", "300px");
+			$('.diag-line').css("transform", "rotate(-45deg)");
+		} 
+		$('.diag-line-after').animate({width: "428px"}, 2000);
 	}
 
 	function toggleCurrentPiece() {
@@ -181,29 +185,35 @@ Game.prototype.scanDiagonalWin = function(row, col, currentPiece) {
 	if(row === 1 && col === 1) {
 		if(this.boardArray[0][0] === currentPiece && this.boardArray[2][2] === currentPiece) {
 			this.isGameOver = true;
+			return true;
 		}
 		else if(this.boardArray[0][2] === currentPiece && this.boardArray[2][0] === currentPiece) {
 			this.isGameOver = true;
+			return true;
 		}
 	}
 	else if(row === 0 && col === 0) {
 		if(this.boardArray[1][1] === currentPiece && this.boardArray[2][2] === currentPiece) {
 			this.isGameOver = true;
+			return true;
 		}
 	}
 	else if(row === 0 && col === 2) {
 		if(this.boardArray[1][1] === currentPiece && this.boardArray[2][0] === currentPiece) {
 			this.isGameOver = true;
+			return true;
 		}
 	}
 	else if(row === 2 && col === 0) {
 		if(this.boardArray[1][1] === currentPiece && this.boardArray[0][2] === currentPiece) {
 			this.isGameOver = true;
+			return true;
 		}
 	}
 	else if(row === 2 && col === 2) {
 		if(this.boardArray[1][1] === currentPiece && this.boardArray[0][0] === currentPiece) {
 			this.isGameOver = true;
+			return true;
 		}
 	}
 };

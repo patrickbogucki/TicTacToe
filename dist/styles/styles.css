@@ -69,12 +69,12 @@ body {
   width: 0px;
   transform: rotate(45deg); }
 
-.diag-line:after {
-  background: #FFFFFF;
+.diag-line-after {
+  background: #B6DBFF;
   content: "";
   height: 10px;
   position: absolute;
-  width: 428px; }
+  width: 0px; }
 
 .cell {
   width: 100px;
