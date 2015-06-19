@@ -8,18 +8,16 @@ body {
   text-align: center;
   min-width: 600px; }
 
-.scoreboard {
-  margin-bottom: 30px; }
-  .scoreboard ul {
-    list-style: none;
+.scoreboard ul {
+  list-style: none;
+  display: inline-block;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-top: 4px double;
+  border-bottom: 4px double; }
+  .scoreboard ul li {
     display: inline-block;
-    padding-left: 20px;
-    padding-right: 20px;
-    border-top: 4px double;
-    border-bottom: 4px double; }
-    .scoreboard ul li {
-      display: inline-block;
-      width: 70px; }
+    width: 70px; }
 
 .player1Header {
   font-weight: 400; }
@@ -28,6 +26,24 @@ body {
   width: auto;
   margin-left: 20px;
   margin-right: 20px; }
+
+.buttons {
+  margin-bottom: 40px; }
+
+.button {
+  display: inline-block;
+  padding: 2px 5px;
+  margin-left: 15px;
+  background-color: transparent;
+  color: #6287A4;
+  border: #6287A4 solid 2px;
+  border-radius: 5px;
+  cursor: pointer; }
+
+.button:hover {
+  background-color: #6287A4;
+  border-color: #6287A4;
+  color: #232323; }
 
 .gameboard {
   width: auto;

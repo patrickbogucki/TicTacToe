@@ -26,7 +26,6 @@ body {
 }
 
 .scoreboard {
-	margin-bottom: 30px;
 	ul {
 		list-style: none;
 		display: inline-block;
@@ -49,6 +48,27 @@ body {
 	width: auto;
 	margin-left: 20px;
 	margin-right: 20px;
+}
+
+.buttons {
+	margin-bottom: 40px;
+}
+
+.button {
+	display: inline-block;
+	padding: 2px 5px;
+	margin-left: 15px;
+	background-color: rgba(0, 0, 0, 0);
+	color: #6287A4;
+	border: #6287A4 solid 2px;
+	border-radius:  5px;
+	cursor: pointer;
+}
+
+.button:hover {
+	background-color: #6287A4;
+	border-color: #6287A4;
+	color: #232323;
 }
 
 .gameboard {
