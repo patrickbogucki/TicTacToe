@@ -30,7 +30,7 @@ function main() {
 			} else if(appeared === false) {
 				drawAlertMessage(waitMsg);
 			} else {
-				clickedCell.children().remove();
+				// clickedCell.children().remove();
 				appeared = false;
 
 				// Log location of click on board
@@ -48,9 +48,6 @@ function main() {
 				else if (game.scanDiagonalWin(rowIndex, colIndex, currentPiece)) {
 					drawDiagonalLine(rowIndex + 1, colIndex + 1);
 				}
-
-				// game.checkGameForWin(rowIndex, colIndex, currentPiece);
-
 				toggleCurrentPiece();
 			}
 		}		
@@ -100,28 +97,27 @@ function main() {
 
 	// Change to use CSS stored lines (diag-top and diag-bot)
 	function drawDiagonalLine(row, col) {
-		// Set line location. Initializes in top left and draws towards bottom right. Check if it should be moved to bottom left and draw to top right.
 		var line;
-		if((row === 3 && col === 1) || (row === 1 && col === 3)) {
-			$('.gameboard').append('<div class="diag-line-bot"></div>');
-			line = $('.diag-line-bot');
-		} else {
+		if((row === 1 && col === 1) || (row === 3 && col === 3)) {
 			$('.gameboard').append('<div class="diag-line-top"></div>');
 			line = $('.diag-line-top');
+		} else {
+			$('.gameboard').append('<div class="diag-line-bot"></div>');
+			line = $('.diag-line-bot');
 		}
 		line.append('<div class="diag-line-after"></div>');
-		$('.diag-line-after').animate({width: "414px"}, 2000);
+		$('.diag-line-after').animate({width: "420px"}, 2000);
 	}
 
 	function toggleCurrentPiece() {
 		if(currentPiece === pieceX) {
 			currentPiece = pieceO;
-			$('.playerHeader').css('font-weight', 300);
-			$('.AIHeader').css('font-weight', 400);
+			$('.player1Header').css('font-weight', 300);
+			$('.player2Header').css('font-weight', 400);
 		} else {
 			currentPiece = pieceX;
-			$('.playerHeader').css('font-weight', 400);
-			$('.AIHeader').css('font-weight', 300);
+			$('.player1Header').css('font-weight', 400);
+			$('.player2Header').css('font-weight', 300);
 		}
 	}
 }
