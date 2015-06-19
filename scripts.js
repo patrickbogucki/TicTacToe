@@ -98,14 +98,19 @@ function main() {
 		vertLine.animate({height: "100%"}, 2000);
 	}
 
+	// Change to use CSS stored lines (diag-top and diag-bot)
 	function drawDiagonalLine(row, col) {
 		// Set line location. Initializes in top left and draws towards bottom right. Check if it should be moved to bottom left and draw to top right.
-		$('.gameboard').append('<div class="diag-line"><div class="diag-line-after"></div></div>');
+		var line;
 		if((row === 3 && col === 1) || (row === 1 && col === 3)) {
-			$('.diag-line').css("top", "300px");
-			$('.diag-line').css("transform", "rotate(-45deg)");
-		} 
-		$('.diag-line-after').animate({width: "428px"}, 2000);
+			$('.gameboard').append('<div class="diag-line-bot"></div>');
+			line = $('.diag-line-bot');
+		} else {
+			$('.gameboard').append('<div class="diag-line-top"></div>');
+			line = $('.diag-line-top');
+		}
+		line.append('<div class="diag-line-after"></div>');
+		$('.diag-line-after').animate({width: "414px"}, 2000);
 	}
 
 	function toggleCurrentPiece() {

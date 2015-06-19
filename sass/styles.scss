@@ -2,8 +2,8 @@
 //	Variables
 ////////////////////////////
 
-$win-line-height: 10px;
-$win-line-color: #B6DBFF;
+$win-line-height: 12px;
+$win-line-color: #5180AE;
 
 //////////////////////////////
 //	Styles
@@ -80,22 +80,6 @@ body {
 	// display: none;
 }
 
-// //TERRIBLE
-// .line {
-// 	background: $win-line-color;
-// 	content: "";
-// 	height: $win-line-height;
-// 	position: absolute;
-// 	left: -33.33%;
-// 	top: 150%;
-// 	width: 100%;
-// 	margin-top: -$win-line-height / 2;
-// 	-ms-transform: rotate(90deg);
-// 	-webkit-transform: rotate(90deg);
-// 	transform: rotate(90deg);
-// 	// display: none;
-// }
-
 .vert-line {
 	background: $win-line-color;
 	content: "";
@@ -107,30 +91,32 @@ body {
 	right: 0;
 	top: 0;
 	width: $win-line-height;
-	// margin-top: -$win-line-height / 2;
 	z-index: 999999;
-	// -ms-transform: rotate(90deg);
-	// -webkit-transform: rotate(90deg);
-	// transform: rotate(90deg);
-	// display: none;
 }
 
 // Diagonal line container used to rotate and prevent change of length of line from moving itself around grid
-.diag-line {
+.diag-line-top {
 	  position: absolute;
-	  left: 6px;
+	  left: 8px;
 	  top: 0px;
 	  width: 0px;
 	  transform: rotate(45deg); 
+}
+
+.diag-line-bot {
+	  position: absolute;
+	  left: 3px;
+	  top: 300px;
+	  width: 0px;
+	  transform: rotate(-45deg); 
 }
 
 // Visible line
 .diag-line-after {
 	  background: $win-line-color;
 	  content: "";
-	  height: 10px;
+	  height: $win-line-height;
 	  position: absolute;
-	  width: 0px; 
 }
 
 .cell {

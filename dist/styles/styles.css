@@ -40,17 +40,17 @@ body {
   position: relative; }
 
 .hor-line {
-  background: #B6DBFF;
+  background: #5180AE;
   content: "";
-  height: 10px;
+  height: 12px;
   position: absolute;
   left: 0%;
   top: 50%;
   width: 0%;
-  margin-top: -5px; }
+  margin-top: -6px; }
 
 .vert-line {
-  background: #B6DBFF;
+  background: #5180AE;
   content: "";
   height: 0%;
   position: absolute;
@@ -59,22 +59,28 @@ body {
   left: 0;
   right: 0;
   top: 0;
-  width: 10px;
+  width: 12px;
   z-index: 999999; }
 
-.diag-line {
+.diag-line-top {
   position: absolute;
-  left: 6px;
+  left: 8px;
   top: 0px;
   width: 0px;
   transform: rotate(45deg); }
 
-.diag-line-after {
-  background: #B6DBFF;
-  content: "";
-  height: 10px;
+.diag-line-bot {
   position: absolute;
-  width: 0px; }
+  left: 3px;
+  top: 300px;
+  width: 0px;
+  transform: rotate(-45deg); }
+
+.diag-line-after {
+  background: #5180AE;
+  content: "";
+  height: 12px;
+  position: absolute; }
 
 .cell {
   width: 100px;
