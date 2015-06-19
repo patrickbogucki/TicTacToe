@@ -5,6 +5,8 @@ function main() {
 
 	var currentPiece = pieceX; 	// X starts with first move
 
+	var winLine;
+
 	var verticalLinePixelOffset = 216;
 
 	var hasPieceMsg = "There is already a piece there.";
@@ -53,6 +55,10 @@ function main() {
 		}		
 	});
 
+	$('.new-game').on('click', function() {
+		resetGameBoard();
+	});
+
 	function drawAlertMessage(message) {
 		$('.alert-message').text(message);
 		$('.alert-message').finish()
@@ -72,8 +78,8 @@ function main() {
 
 	function drawHorizontalLine(row) {
 		$('.row:nth-of-type(' + row + ')').append('<div class="hor-line"></div>');
-		var horLine = $('.row').find('.hor-line');
-		horLine.animate({width: "100%"}, 2000);
+		winLine = $('.row').find('.hor-line');
+		winLine.animate({width: "100%"}, 2000);
 	}
 
 	function drawVerticalLine(col) {
@@ -90,22 +96,21 @@ function main() {
 		}
 
 		$('.gameboard').append('<div class="vert-line"></div>');
-		var vertLine = $('.gameboard').find('.vert-line');
-		vertLine.css("left", vertLineOffset);
-		vertLine.animate({height: "100%"}, 2000);
+		winLine = $('.gameboard').find('.vert-line');
+		winLine.css("left", vertLineOffset);
+		winLine.animate({height: "100%"}, 2000);
 	}
 
 	// Change to use CSS stored lines (diag-top and diag-bot)
 	function drawDiagonalLine(row, col) {
-		var line;
 		if((row === 1 && col === 1) || (row === 3 && col === 3)) {
 			$('.gameboard').append('<div class="diag-line-top"></div>');
-			line = $('.diag-line-top');
+			winLine = $('.diag-line-top');
 		} else {
 			$('.gameboard').append('<div class="diag-line-bot"></div>');
-			line = $('.diag-line-bot');
+			winLine = $('.diag-line-bot');
 		}
-		line.append('<div class="diag-line-after"></div>');
+		winLine.append('<div class="diag-line-after"></div>');
 		$('.diag-line-after').animate({width: "420px"}, 2000);
 	}
 
@@ -118,6 +123,14 @@ function main() {
 			currentPiece = pieceX;
 			$('.player1Header').css('font-weight', 400);
 			$('.player2Header').css('font-weight', 300);
+		}
+	}
+
+	function resetGameBoard () {
+		game.resetGameBoard();
+		$('.cell').children().remove();
+		if(winLine !== undefined) {
+			winLine.remove();
 		}
 	}
 }
@@ -217,6 +230,18 @@ Game.prototype.scanDiagonalWin = function(row, col, currentPiece) {
 			return true;
 		}
 	}
+};
+
+// TODO
+Game.prototype.resetGameBoard = function() {
+	this.boardArray = [
+		[null, null, null],
+		[null, null, null],
+		[null, null, null]
+	];
+	this.isGameOver = false;
+
+	console.log("New game started.");
 };
 
 $(document).ready(main);
