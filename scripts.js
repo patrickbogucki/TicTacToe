@@ -19,6 +19,17 @@ function main() {
 
 	// $('.cell').height($('.cell').width());
 
+	// Close modal when clicking around it
+	$('.piece-selection-modal').on('click', function() {
+		return false;
+	});
+
+	$('.piece-selection-container').on('click', function() {
+		$('.piece-selection-container').css({
+			display: 'none'
+		});
+	});
+
 	$('.cell').on('click', function() {
 		var clickedCell = $(this);
 		var rowIndex = clickedCell.closest('.row').index('.row');
@@ -41,6 +52,7 @@ function main() {
 
 				drawPiece(clickedCell, currentPiece);
 
+				// Check if game was won and in which direction
 				if(game.scanRowWin(rowIndex, currentPiece)) {
 					drawHorizontalLine(rowIndex + 1);
 				}
@@ -114,6 +126,7 @@ function main() {
 		$('.diag-line-after').animate({width: "420px"}, 2000);
 	}
 
+	// Switch to opposite players turn and adjust styling
 	function toggleCurrentPiece() {
 		if(currentPiece === pieceX) {
 			currentPiece = pieceO;
@@ -142,6 +155,11 @@ function Game() {
 		[null, null, null]
 	];
 	this.isGameOver = false;
+
+	this.player1Score = 0;
+	this.player2Score = 0;
+	this.player1Piece = null;
+	this.player2Piece = null;
 
 	console.log("New game started.");
 }
@@ -245,3 +263,4 @@ Game.prototype.resetGameBoard = function() {
 };
 
 $(document).ready(main);
+
