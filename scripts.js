@@ -3,7 +3,8 @@ function main() {
 	var pieceX = "x";
 	var pieceO = "o";
 
-	var currentPiece = pieceX; 	// X starts with first move
+	var currentPiece = null; 	// X starts with first move
+	var currentTurn = null;
 
 	var winLine;
 
@@ -17,6 +18,10 @@ function main() {
 
 	var game = new Game();
 
+	// Player pieces will be set once player 1 has chosen their piece
+	var player1 = new Player(1, 0, null);
+	var player2 = new Player(2, 0, null);
+
 	// $('.cell').height($('.cell').width());
 
 	// Close modal when clicking around it
@@ -28,6 +33,28 @@ function main() {
 		$('.piece-selection-container').css({
 			display: 'none'
 		});
+	});
+
+	$('.piece-selection-x').on('click', function() {
+		game.setPlayer1Piece = pieceX;
+		game.setPlayer2Piece = pieceO;
+		$('.piece-selection-container').css({
+			display: 'none'
+		});
+		player1 = new Player(1, 0, pieceX);
+		player2 = new Player(2, 0, pieceO);
+		currentTurn = player1;
+	});
+
+	$('.piece-selection-o').on('click', function() {
+		game.setPlayer1Piece = pieceO;
+		game.setPlayer2Piece = pieceX;
+		$('.piece-selection-container').css({
+			display: 'none'
+		});
+		player1 = new Player(1, 0, pieceO);
+		player2 = new Player(2, 0, pieceX);
+		currentTurn = player1;
 	});
 
 	$('.cell').on('click', function() {
@@ -47,19 +74,19 @@ function main() {
 				appeared = false;
 
 				// Log location of click on board
-				game.updateBoardArray(rowIndex, colIndex, currentPiece);
+				game.updateBoardArray(rowIndex, colIndex, currentTurn.getPiece());
 				game.printBoardArray();
 
-				drawPiece(clickedCell, currentPiece);
+				drawPiece(clickedCell, currentTurn.getPiece());
 
 				// Check if game was won and in which direction
-				if(game.scanRowWin(rowIndex, currentPiece)) {
+				if(game.scanRowWin(rowIndex, currentTurn.getPiece())) {
 					drawHorizontalLine(rowIndex + 1);
 				}
-				else if(game.scanColWin(colIndex, currentPiece)) {
+				else if(game.scanColWin(colIndex, currentTurn.getPiece())) {
 					drawVerticalLine(colIndex + 1);
 				}
-				else if (game.scanDiagonalWin(rowIndex, colIndex, currentPiece)) {
+				else if (game.scanDiagonalWin(rowIndex, colIndex, currentTurn.getPiece())) {
 					drawDiagonalLine(rowIndex + 1, colIndex + 1);
 				}
 				toggleCurrentPiece();
@@ -128,12 +155,12 @@ function main() {
 
 	// Switch to opposite players turn and adjust styling
 	function toggleCurrentPiece() {
-		if(currentPiece === pieceX) {
-			currentPiece = pieceO;
+		if(currentTurn === player1) {
+			currentTurn = player2;
 			$('.player1Header').css('font-weight', 300);
 			$('.player2Header').css('font-weight', 400);
 		} else {
-			currentPiece = pieceX;
+			currentTurn = player1;
 			$('.player1Header').css('font-weight', 400);
 			$('.player2Header').css('font-weight', 300);
 		}
@@ -155,12 +182,6 @@ function Game() {
 		[null, null, null]
 	];
 	this.isGameOver = false;
-
-	this.player1Score = 0;
-	this.player2Score = 0;
-	this.player1Piece = null;
-	this.player2Piece = null;
-
 	console.log("New game started.");
 }
 
@@ -250,6 +271,14 @@ Game.prototype.scanDiagonalWin = function(row, col, currentPiece) {
 	}
 };
 
+Game.prototype.setPlayer1Piece = function(piece) {
+	this.player1Piece = piece;
+};
+
+Game.prototype.setPlayer2Piece = function(piece) {
+	this.player2Piece = piece;
+};
+
 // TODO
 Game.prototype.resetGameBoard = function() {
 	this.boardArray = [
@@ -260,6 +289,24 @@ Game.prototype.resetGameBoard = function() {
 	this.isGameOver = false;
 
 	console.log("New game started.");
+};
+
+function Player(number, score, piece) {
+	this._playerNumber = number; // 1, 2 with respect to player 1 and player 2
+	this._score = score;
+	this._piece = piece;
+}
+
+Player.prototype.setScore = function(score) {
+	this._score = score;
+};
+
+Player.prototype.setPiece = function(piece) {
+	this._piece = piece;
+};
+
+Player.prototype.getPiece = function() {
+	return this._piece;
 };
 
 $(document).ready(main);

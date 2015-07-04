@@ -191,7 +191,7 @@ body {
   cursor: pointer;
   font-size: 54pt; }
   .piece-selection-x:hover, .piece-selection-o:hover {
-    animation: piece-selection 1s forwards; }
+    animation: piece-selection 0.5s forwards; }
 
 @keyframes piece-selection {
 
