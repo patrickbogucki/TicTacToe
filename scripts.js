@@ -3,7 +3,6 @@ function main() {
 	var pieceX = "x";
 	var pieceO = "o";
 
-	var currentPiece = null; 	// X starts with first move
 	var currentTurn = null;
 
 	var winLine;
@@ -12,7 +11,7 @@ function main() {
 
 	var hasPieceMsg = "There is already a piece there.";
 	var waitMsg = "Please Wait";
-	var gameOverMsg = "Game Over.\nRefresh to play again";
+	var gameOverMsg = "Game Over.\n Click 'New Game' to play again.";
 	
 	var appeared;
 
@@ -24,13 +23,18 @@ function main() {
 
 	// $('.cell').height($('.cell').width());
 
+	$('.piece-selection-container').css({
+		display: 'block'
+	});
+
 	// Close modal when clicking around it
-	$('.piece-selection-modal').on('click', function() {
+	$('.modal').on('click', function() {
 		return false;
 	});
 
-	$('.piece-selection-container').on('click', function() {
-		$('.piece-selection-container').css({
+	// Show piece selection modal on page load
+	$('.container-modal').on('click', function() {
+		$('.container-modal').css({
 			display: 'none'
 		});
 	});
@@ -70,16 +74,17 @@ function main() {
 			} else if(appeared === false) {
 				drawAlertMessage(waitMsg);
 			} else {
-				// clickedCell.children().remove();
 				appeared = false;
 
 				// Log location of click on board
 				game.updateBoardArray(rowIndex, colIndex, currentTurn.getPiece());
 				game.printBoardArray();
 
+				// Draw current players piece in cell that was clicked
 				drawPiece(clickedCell, currentTurn.getPiece());
 
 				// Check if game was won and in which direction
+				// If game was won, draw line through winning pieces
 				if(game.scanRowWin(rowIndex, currentTurn.getPiece())) {
 					drawHorizontalLine(rowIndex + 1);
 				}
@@ -89,13 +94,51 @@ function main() {
 				else if (game.scanDiagonalWin(rowIndex, colIndex, currentTurn.getPiece())) {
 					drawDiagonalLine(rowIndex + 1, colIndex + 1);
 				}
-				toggleCurrentPiece();
+
+				// If game is over increment winners score and update scoreboard
+				// Else change turn to opposite player
+				if(game.isGameOver) {
+					currentTurn.setScore(currentTurn.getScore() + 1);
+					updateScores();
+					drawAlertMessage("Player" + currentTurn._playerNumber + " wins!");
+				} else {
+					toggleCurrentPiece();
+				}
+				
 			}
 		}		
 	});
-
+	
 	$('.new-game').on('click', function() {
+		$('.new-game-container').css({
+			display: 'block'
+		});
+	});
+
+	$('.new-game-yes-player1').on('click', function() {
 		resetGameBoard();
+		setTurn(player1);
+		$('.new-game-container').css({
+			display: 'none'
+		});
+	});
+
+	$('.new-game-yes-player2').on('click', function() {
+		resetGameBoard();
+		setTurn(player2);
+		$('.new-game-container').css({
+			display: 'none'
+		});
+	});
+
+	$('.new-game-no').on('click', function() {
+		$('.new-game-container').css({
+			display: 'none'
+		});
+	});
+
+	$('.clear-game').on('click', function() {
+		resetScores();
 	});
 
 	function drawAlertMessage(message) {
@@ -156,13 +199,9 @@ function main() {
 	// Switch to opposite players turn and adjust styling
 	function toggleCurrentPiece() {
 		if(currentTurn === player1) {
-			currentTurn = player2;
-			$('.player1Header').css('font-weight', 300);
-			$('.player2Header').css('font-weight', 400);
+			setTurn(player2);
 		} else {
-			currentTurn = player1;
-			$('.player1Header').css('font-weight', 400);
-			$('.player2Header').css('font-weight', 300);
+			setTurn(player1);
 		}
 	}
 
@@ -172,6 +211,28 @@ function main() {
 		if(winLine !== undefined) {
 			winLine.remove();
 		}
+	}
+
+	function setTurn(player) {
+		currentTurn = player;
+		
+		// Reset scoreboard fontweights
+		$('.player1Header').css('font-weight', 300);
+		$('.player2Header').css('font-weight', 300);
+
+		// Set scoreboard weight only for selected item
+		$('.player' + player._playerNumber + 'Header').css('font-weight', 400);
+	}
+
+	function updateScores() {
+		$('.player1Score').text(player1.getScore());
+		$('.player2Score').text(player2.getScore());
+	}
+
+	function resetScores() {
+		player1.setScore(0);
+		player2.setScore(0);
+		updateScores();
 	}
 }
 
@@ -299,6 +360,10 @@ function Player(number, score, piece) {
 
 Player.prototype.setScore = function(score) {
 	this._score = score;
+};
+
+Player.prototype.getScore = function() {
+	return this._score;
 };
 
 Player.prototype.setPiece = function(piece) {

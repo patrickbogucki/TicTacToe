@@ -63,12 +63,13 @@ body {
 	border: #6287A4 solid 2px;
 	border-radius:  5px;
 	cursor: pointer;
-}
-
-.button:hover {
-	background-color: #6287A4;
-	border-color: #6287A4;
-	color: #232323;
+	transition-property: background-color, border-color, color;
+	transition-duration: 0.5s;
+	&:hover {
+		background-color: #6287A4;
+		border-color: #6287A4;
+		color: #232323;
+	}
 }
 
 .gameboard {
@@ -106,7 +107,6 @@ body {
 	right: 0;
 	top: 0;
 	width: $win-line-height;
-	z-index: 999999;
 }
 
 // Diagonal line container used to rotate and prevent change of length of line from moving itself around grid
@@ -211,8 +211,6 @@ body {
 	display: none;
 }
 
-
-
 .alert {
 	margin-top: 20px;
 	color: red;
@@ -224,15 +222,24 @@ body {
 }
 
 .piece-selection-container {
+
+}
+
+.container-modal {
 	position: fixed;
 	width: 100%;
 	height: 100%;
 	top: 0;
 	background-color: rgba(#FFFFFF, 0.5);
 	right: 0;
+	display: none;
 }
 
 .piece-selection-modal {
+
+} 
+
+.modal {
 	position: relative;
 	top: 100px;
 	width: 300px;
@@ -257,38 +264,24 @@ body {
 	text-align: center;
 }
 
-.piece-selection-x,
-.piece-selection-o {
+.modal-button {
 	background-color: #2E2E2E;
-	display: inline-block;
+	display: block;
 	margin: 5px 20px;
-	height: 80px;
-	width: 80px;
+	text-align: center;
 	border: 3px solid #6888A2;
 	border-radius: 20px;
 	cursor: pointer;
-	font-size: 54pt;
-	// color: #FFFFFF;
-
+	transition: background-color 0.5s;
 	&:hover {
-		animation: piece-selection 0.5s forwards;
-		
-	}
-}
-
-@keyframes piece-selection {
-	from {
-	}
-	to {
 		background-color: #CCCCCC;
 	}
 }
 
-.piece-selection-x {
-}
-
+.piece-selection-x ,
 .piece-selection-o {
-
+	height: 80px;
+	width: 80px;
+	display: inline-block;
+	font-size: 54pt;
 }
-
-
