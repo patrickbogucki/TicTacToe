@@ -11,6 +11,7 @@ function main() {
 
 	var hasPieceMsg = "There is already a piece there.";
 	var waitMsg = "Please Wait";
+	var tieGameMsg = "The game has ended in a Tie!";
 	var gameOverMsg = "Game Over.\n Click 'New Game' to play again.";
 	
 	var appeared;
@@ -28,12 +29,12 @@ function main() {
 	});
 
 	// Close modal when clicking around it
-	$('.modal').on('click', function() {
+	$('.new-game-modal').on('click', function() {
 		return false;
 	});
 
 	// Show piece selection modal on page load
-	$('.container-modal').on('click', function() {
+	$('.new-game-container').on('click', function() {
 		$('.container-modal').css({
 			display: 'none'
 		});
@@ -94,7 +95,10 @@ function main() {
 				else if (game.scanDiagonalWin(rowIndex, colIndex, currentTurn.getPiece())) {
 					drawDiagonalLine(rowIndex + 1, colIndex + 1);
 				}
-
+				else if(game.scanForTie()) {
+					drawAlertMessage(tieGameMsg);
+					return;
+				}
 				// If game is over increment winners score and update scoreboard
 				// Else change turn to opposite player
 				if(game.isGameOver) {
@@ -143,7 +147,7 @@ function main() {
 
 	function drawAlertMessage(message) {
 		$('.alert-message').text(message);
-		$('.alert-message').finish()
+		$('.alert').finish()
 			.css('display', 'none')
 			.fadeIn('slow')
 			.delay(1000)
@@ -330,6 +334,18 @@ Game.prototype.scanDiagonalWin = function(row, col, currentPiece) {
 			return true;
 		}
 	}
+};
+
+Game.prototype.scanForTie = function() {
+	for(var i = 0; i < this.boardArray.length; i++) {
+		for(var j = 0; j < this.boardArray[i].length; j++) {
+			if (this.boardArray[i][j] === null) {
+				return false;
+			}
+		}
+	}
+	this.isGameOver = true;
+	return true;
 };
 
 Game.prototype.setPlayer1Piece = function(piece) {

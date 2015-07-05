@@ -145,10 +145,10 @@ body {
 
 .alert {
   margin-top: 20px;
-  color: red; }
+  color: red;
+  display: none; }
 
 .alert-message {
-  display: none;
   font-weight: 400; }
 
 .container-modal {
@@ -172,10 +172,10 @@ body {
   box-shadow: 4px 4px 10px 6px rgba(0, 0, 0, 0.2);
   transform: translateZ(10); }
 
-.piece-selection-title {
+.modal-title {
   text-align: center; }
 
-.piece-selection-message {
+.modal-message {
   text-align: justify; }
 
 .piece-selection-buttons {
@@ -185,11 +185,12 @@ body {
   background-color: #2E2E2E;
   display: block;
   margin: 5px 20px;
+  padding: 10px 10px;
   text-align: center;
   border: 3px solid #6888A2;
   border-radius: 20px;
   cursor: pointer;
-  transition: background-color 0.5s; }
+  transition: background-color 0.25s; }
   .modal-button:hover {
     background-color: #CCCCCC; }
 
@@ -198,3 +199,6 @@ body {
   width: 80px;
   display: inline-block;
   font-size: 54pt; }
+
+.new-game-message {
+  text-align: left; }
