@@ -386,6 +386,7 @@ Game.prototype.resetGameBoard = function() {
 
 function Player(number, score, piece) {
 	this._playerNumber = number;
+	this._score = score;
 	this._piece = piece;
 }
 
