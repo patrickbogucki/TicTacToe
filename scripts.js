@@ -160,7 +160,22 @@ function main() {
 	});
 
 	$('.clear-game').on('click', function() {
+		$('.clear-scores-container').css({
+			display: 'block'
+		});
+	});
+
+	$('.clear-scores-yes').on('click', function() {
 		resetScores();
+		$('.clear-scores-container').css({
+			display: 'none'
+		});
+	});
+
+	$('.clear-scores-no').on('click', function() {
+		$('.clear-scores-container').css({
+			display: 'none'
+		});
 	});
 
 	function drawAlertMessage(message) {
