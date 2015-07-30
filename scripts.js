@@ -126,6 +126,7 @@ function main() {
 		$('.new-game-container').css({
 			display: 'none'
 		});
+		$('.new-game-loser').addClass('modal-button-disabled');
 	});
 
 	$('.new-game-yes-player2').on('click', function() {
@@ -134,6 +135,7 @@ function main() {
 		$('.new-game-container').css({
 			display: 'none'
 		});
+		$('.new-game-loser').addClass('modal-button-disabled');
 	});
 
 	$('.new-game-loser').on('click', function() {
@@ -147,6 +149,7 @@ function main() {
 			$('.new-game-container').css({
 				display: 'none'
 			});
+			$('.new-game-loser').addClass('modal-button-disabled');
 		}
 	});
 
