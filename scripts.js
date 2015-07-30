@@ -14,7 +14,7 @@ function main() {
 	var tieGameMsg = "The game has ended in a Tie!";
 	var gameOverMsg = "Game Over.\n Click 'New Game' to play again.";
 	
-	var appeared;
+	var appeared = true;
 
 	var game = new Game();
 
@@ -75,7 +75,7 @@ function main() {
 			} else if(appeared === false) {
 				drawAlertMessage(waitMsg);
 			} else {
-				appeared = false;
+				// appeared = false;
 
 				// Log location of click on board
 				game.updateBoardArray(rowIndex, colIndex, currentTurn.getPiece());
@@ -135,6 +135,18 @@ function main() {
 		});
 	});
 
+	$('.new-game-loser').on('click', function() {
+		resetGameBoard();
+		if(currentTurn === player1) {
+			setTurn(player2);
+		} else {
+			setTurn(player1);
+		}
+		$('.new-game-container').css({
+			display: 'none'
+		});
+	});
+
 	$('.new-game-no').on('click', function() {
 		$('.new-game-container').css({
 			display: 'none'
@@ -156,10 +168,7 @@ function main() {
 	}
 
 	function drawPiece(cell, pieceSymbol) {
-		cell.append('<div class=piece-' + pieceSymbol + '></div>');
-		cell.find('.piece-' + pieceSymbol).fadeIn('slow', function() {
-			appeared = true;
-		});
+		cell.append('<div class="piece-' + pieceSymbol + '"></div>');
 	}
 
 	function drawHorizontalLine(row) {
@@ -369,6 +378,7 @@ Game.prototype.resetGameBoard = function() {
 };
 
 function Player(number, score, piece) {
+	this._playerNumber = number;
 	this._piece = piece;
 }
 
