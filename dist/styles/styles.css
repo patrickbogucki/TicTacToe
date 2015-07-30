@@ -197,6 +197,12 @@ body {
   .modal-button:hover {
     background-color: #CCCCCC; }
 
+.modal-button-disabled {
+  opacity: 0.5;
+  cursor: default; }
+  .modal-button-disabled:hover {
+    background-color: #2E2E2E; }
+
 .piece-selection-x, .piece-selection-o {
   height: 80px;
   width: 80px;

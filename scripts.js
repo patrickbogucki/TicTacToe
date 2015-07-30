@@ -104,6 +104,7 @@ function main() {
 				if(game.isGameOver) {
 					currentTurn.setScore(currentTurn.getScore() + 1);
 					updateScores();
+					enableNewGameLoserModalButton();
 					drawAlertMessage("Player" + currentTurn._playerNumber + " wins!");
 				} else {
 					toggleCurrentPiece();
@@ -136,15 +137,17 @@ function main() {
 	});
 
 	$('.new-game-loser').on('click', function() {
-		resetGameBoard();
-		if(currentTurn === player1) {
-			setTurn(player2);
-		} else {
-			setTurn(player1);
+		if(game.isGameOver) {
+			resetGameBoard();
+			if(currentTurn === player1) {
+				setTurn(player2);
+			} else {
+				setTurn(player1);
+			}
+			$('.new-game-container').css({
+				display: 'none'
+			});
 		}
-		$('.new-game-container').css({
-			display: 'none'
-		});
 	});
 
 	$('.new-game-no').on('click', function() {
@@ -246,6 +249,10 @@ function main() {
 		player1.setScore(0);
 		player2.setScore(0);
 		updateScores();
+	}
+
+	function enableNewGameLoserModalButton() {
+		$('.new-game-loser').removeClass('modal-button-disabled');
 	}
 }
 
