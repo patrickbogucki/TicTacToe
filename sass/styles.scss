@@ -22,7 +22,7 @@ body {
 
 .container {
 	text-align: center;
-	min-width: 600px
+	min-width: 466px;
 }
 
 .scoreboard {
@@ -40,8 +40,8 @@ body {
 	}
 }
 
-.player1Header {
-	font-weight: 400;
+.header-current-turn {
+	font-weight: 700;
 }
 
 .gameTitle {
@@ -66,6 +66,24 @@ body {
 	transition-property: background-color, border-color, color;
 	transition-duration: 0.5s;
 	&:hover {
+		background-color: #6287A4;
+		border-color: #6287A4;
+		color: #232323;
+		animation: none;
+	}
+}
+
+.new-game-blink {
+	animation: blink-button 1s linear 0s infinite alternate;	
+}
+
+@keyframes blink-button {
+	from {
+		background-color: rgba(0, 0, 0, 0);
+		color: #6287A4;
+		border: #6287A4 solid 2px;
+	}
+	to {
 		background-color: #6287A4;
 		border-color: #6287A4;
 		color: #232323;

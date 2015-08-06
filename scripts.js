@@ -28,18 +28,6 @@ function main() {
 		display: 'block'
 	});
 
-	// Close modal when clicking around it
-	$('.new-game-modal').on('click', function() {
-		return false;
-	});
-
-	// Show piece selection modal on page load
-	$('.new-game-container').on('click', function() {
-		$('.container-modal').css({
-			display: 'none'
-		});
-	});
-
 	$('.piece-selection-x').on('click', function() {
 		game.setPlayer1Piece = pieceX;
 		game.setPlayer2Piece = pieceO;
@@ -106,6 +94,7 @@ function main() {
 					updateScores();
 					enableNewGameLoserModalButton();
 					drawAlertMessage("Player" + currentTurn._playerNumber + " wins!");
+					$('.new-game').addClass('new-game-blink');
 				} else {
 					toggleCurrentPiece();
 				}
@@ -119,8 +108,22 @@ function main() {
 			display: 'block'
 		});
 	});
+	
+	// Close modal if clicked around it
+	$('.new-game-container').on('click', function() {
+		$('.container-modal').css({
+			display: 'none'
+		});
+	});
+
+
+	// Prevent modal closing when clicking on itself
+	$('.new-game-modal').on('click', function() {
+		return false;
+	});
 
 	$('.new-game-yes-player1').on('click', function() {
+		$('.new-game').removeClass('new-game-blink');
 		resetGameBoard();
 		setTurn(player1);
 		$('.new-game-container').css({
@@ -130,6 +133,7 @@ function main() {
 	});
 
 	$('.new-game-yes-player2').on('click', function() {
+		$('.new-game').removeClass('new-game-blink');
 		resetGameBoard();
 		setTurn(player2);
 		$('.new-game-container').css({
@@ -139,6 +143,7 @@ function main() {
 	});
 
 	$('.new-game-loser').on('click', function() {
+		$('.new-game').removeClass('new-game-blink');
 		if(game.isGameOver) {
 			resetGameBoard();
 			if(currentTurn === player1) {
@@ -174,6 +179,12 @@ function main() {
 
 	$('.clear-scores-no').on('click', function() {
 		$('.clear-scores-container').css({
+			display: 'none'
+		});
+	});
+
+	$('.clear-scores-container').on('click', function() {
+		$('.container-modal').css({
 			display: 'none'
 		});
 	});
@@ -251,11 +262,11 @@ function main() {
 		currentTurn = player;
 		
 		// Reset scoreboard fontweights
-		$('.player1Header').css('font-weight', 300);
-		$('.player2Header').css('font-weight', 300);
+		$('.player1Header').toggleClass('header-current-turn');
+		$('.player2Header').toggleClass('header-current-turn');
 
 		// Set scoreboard weight only for selected item
-		$('.player' + player._playerNumber + 'Header').css('font-weight', 400);
+		// $('.player' + player._playerNumber + 'Header').toggleClass('header-current-turn');
 	}
 
 	function updateScores() {
@@ -273,6 +284,10 @@ function main() {
 		$('.new-game-loser').removeClass('modal-button-disabled');
 	}
 }
+
+//////////////////////////////
+//	Game 
+////////////////////////////
 
 function Game() {
 	this.boardArray = [
@@ -401,6 +416,10 @@ Game.prototype.resetGameBoard = function() {
 
 	console.log("New game started.");
 };
+
+//////////////////////////////
+//	Player
+////////////////////////////
 
 function Player(number, score, piece) {
 	this._playerNumber = number;
