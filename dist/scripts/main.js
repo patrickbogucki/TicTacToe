@@ -272,7 +272,7 @@ function main() {
 			$('.' + player2.getTitle() + 'Header').removeClass('header-current-turn');	
 		} else {
 			$('.' + player2.getTitle() + 'Header').addClass('header-current-turn');
-			$('.' + player1.getTitle() + 'Header').removeClass('header-current-turn')
+			$('.' + player1.getTitle() + 'Header').removeClass('header-current-turn');
 		}
 
 		// Set scoreboard weight only for selected item
