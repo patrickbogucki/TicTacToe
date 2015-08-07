@@ -138,15 +138,14 @@ body {
   animation-name: rotateIn;
   animation-duration: 1s;
   animation-fill-mode: both; }
-
-.piece-x:after {
-  background: #FFFFFF;
-  content: "";
-  height: 10px;
-  position: absolute;
-  left: -45px;
-  top: 45px;
-  width: 100px; }
+  .piece-x:after {
+    background: #FFFFFF;
+    content: "";
+    height: 10px;
+    position: absolute;
+    left: -45px;
+    top: 45px;
+    width: 100px; }
 
 .piece-o {
   width: 60px;
@@ -215,11 +214,33 @@ body {
   .modal-button-disabled:hover {
     background-color: #2E2E2E; }
 
-.piece-selection-x, .piece-selection-o {
+.piece-selection {
   height: 80px;
   width: 80px;
-  display: inline-block;
-  font-size: 54pt; }
+  display: inline-block; }
+
+.piece-selection-x {
+  background: #6287A4;
+  height: 100px;
+  position: relative;
+  left: 35px;
+  top: -10px;
+  width: 10px;
+  transform: rotate(45deg); }
+  .piece-selection-x:after {
+    background: #6287A4;
+    content: "";
+    height: 10px;
+    position: absolute;
+    left: -45px;
+    top: 45px;
+    width: 100px; }
+
+.piece-selection-o {
+  width: 60px;
+  height: 60px;
+  border-radius: 100px;
+  border: 10px solid #6287A4; }
 
 .new-game-message {
   text-align: left; }
