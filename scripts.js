@@ -85,6 +85,8 @@ function main() {
 				}
 				else if(game.scanForTie()) {
 					drawAlertMessage(tieGameMsg);
+					$('.outcome').html('Tie Game');
+					$('.new-game').addClass('new-game-blink');
 					return;
 				}
 				// If game is over increment winners score and update scoreboard
@@ -93,7 +95,7 @@ function main() {
 					currentTurn.setScore(currentTurn.getScore() + 1);
 					updateScores();
 					enableNewGameLoserModalButton();
-					drawAlertMessage("Player" + currentTurn._playerNumber + " wins!");
+					$('.outcome').html("Player " + currentTurn._playerNumber + " wins!");
 					$('.new-game').addClass('new-game-blink');
 				} else {
 					toggleCurrentPiece();
@@ -126,6 +128,7 @@ function main() {
 		$('.new-game').removeClass('new-game-blink');
 		resetGameBoard();
 		setTurn(player1);
+		$('.outcome').html('');
 		$('.new-game-container').css({
 			display: 'none'
 		});
@@ -136,6 +139,7 @@ function main() {
 		$('.new-game').removeClass('new-game-blink');
 		resetGameBoard();
 		setTurn(player2);
+		$('.outcome').html('');
 		$('.new-game-container').css({
 			display: 'none'
 		});
@@ -146,6 +150,7 @@ function main() {
 		$('.new-game').removeClass('new-game-blink');
 		if(game.isGameOver) {
 			resetGameBoard();
+			$('.outcome').html('');
 			if(currentTurn === player1) {
 				setTurn(player2);
 			} else {

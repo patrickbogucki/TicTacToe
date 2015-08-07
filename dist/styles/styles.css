@@ -17,10 +17,12 @@ body {
   border-bottom: 4px double; }
   .scoreboard ul li {
     display: inline-block;
-    width: 70px; }
+    width: 80px; }
 
 .header-current-turn {
   font-weight: 700; }
+  .header-current-turn:before {
+    content: '>'; }
 
 .gameTitle {
   width: auto;
@@ -28,7 +30,7 @@ body {
   margin-right: 20px; }
 
 .buttons {
-  margin-bottom: 40px; }
+  margin-bottom: 10px; }
 
 .button {
   display: inline-block;
@@ -50,16 +52,11 @@ body {
 .new-game-blink {
   animation: blink-button 1s linear 0s infinite alternate; }
 
-@keyframes blink-button {
-  from {
-    background-color: transparent;
-    color: #6287A4;
-    border: #6287A4 solid 2px; }
-
-  to {
-    background-color: #6287A4;
-    border-color: #6287A4;
-    color: #232323; } }
+.outcome {
+  margin-bottom: 10px;
+  color: #FFFFFF;
+  font-size: 24pt;
+  height: 38px; }
 
 .gameboard {
   width: auto;
@@ -226,6 +223,17 @@ body {
 
 .new-game-message {
   text-align: left; }
+
+@keyframes blink-button {
+  from {
+    background-color: transparent;
+    color: #6287A4;
+    border: #6287A4 solid 2px; }
+
+  to {
+    background-color: #6287A4;
+    border-color: #6287A4;
+    color: #232323; } }
 
 @keyframes rotateIn {
   0% {

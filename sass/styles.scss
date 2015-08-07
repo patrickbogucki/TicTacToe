@@ -35,13 +35,17 @@ body {
 		border-bottom: 4px double;
 		li {
 			display: inline-block;
-			width: 70px;
+			width: 80px;
 		}
 	}
 }
 
 .header-current-turn {
 	font-weight: 700;
+	&:before {
+		content: '>';
+
+	}
 }
 
 .gameTitle {
@@ -51,7 +55,7 @@ body {
 }
 
 .buttons {
-	margin-bottom: 40px;
+	margin-bottom: 10px;
 }
 
 .button {
@@ -77,17 +81,11 @@ body {
 	animation: blink-button 1s linear 0s infinite alternate;	
 }
 
-@keyframes blink-button {
-	from {
-		background-color: rgba(0, 0, 0, 0);
-		color: #6287A4;
-		border: #6287A4 solid 2px;
-	}
-	to {
-		background-color: #6287A4;
-		border-color: #6287A4;
-		color: #232323;
-	}
+.outcome {
+	margin-bottom: 10px;
+	color: #FFFFFF;
+	font-size: 24pt;
+	height: 38px;
 }
 
 .gameboard {
@@ -320,6 +318,23 @@ body {
 
 .new-game-message {
 	text-align: left;
+}
+
+//////////////////////////////
+//	Animations
+////////////////////////////
+
+@keyframes blink-button {
+	from {
+		background-color: rgba(0, 0, 0, 0);
+		color: #6287A4;
+		border: #6287A4 solid 2px;
+	}
+	to {
+		background-color: #6287A4;
+		border-color: #6287A4;
+		color: #232323;
+	}
 }
 
 @keyframes rotateIn {
