@@ -3,26 +3,21 @@ function main() {
 	var pieceX = "x";
 	var pieceO = "o";
 
-	var currentTurn = null;
+	var currentTurnPlayer;
 
 	var winLine;
 
 	var verticalLinePixelOffset = 216;
 
 	var hasPieceMsg = "There is already a piece there.";
-	var waitMsg = "Please Wait";
 	var tieGameMsg = "The game has ended in a Tie!";
 	var gameOverMsg = "Game Over.\n Click 'New Game' to play again.";
-	
-	var appeared = true;
 
 	var game = new Game();
 
 	// Player pieces will be set once player 1 has chosen their piece
 	var player1 = new Player(1, 0, null);
 	var player2 = new Player(2, 0, null);
-
-	// $('.cell').height($('.cell').width());
 
 	$('.piece-selection-container').css({
 		display: 'block'
@@ -31,23 +26,23 @@ function main() {
 	$('.piece-selection-x').parent().on('click', function() {
 		game.setPlayer1Piece = pieceX;
 		game.setPlayer2Piece = pieceO;
+		player1 = new Player(1, 0, pieceX);
+		player2 = new Player(2, 0, pieceO);
 		$('.piece-selection-container').css({
 			display: 'none'
 		});
-		player1 = new Player(1, 0, pieceX);
-		player2 = new Player(2, 0, pieceO);
-		currentTurn = player1;
+		currentTurnPlayer = player1;
 	});
 
 	$('.piece-selection-o').parent().on('click', function() {
 		game.setPlayer1Piece = pieceO;
 		game.setPlayer2Piece = pieceX;
+		player1 = new Player(1, 0, pieceO);
+		player2 = new Player(2, 0, pieceX);
 		$('.piece-selection-container').css({
 			display: 'none'
 		});
-		player1 = new Player(1, 0, pieceO);
-		player2 = new Player(2, 0, pieceX);
-		currentTurn = player1;
+		currentTurnPlayer = player1;
 	});
 
 	$('.cell').on('click', function() {
@@ -60,27 +55,23 @@ function main() {
 		} else {
 			if(game.cellContainsPiece(rowIndex, colIndex)) {
 				drawAlertMessage(hasPieceMsg);
-			} else if(appeared === false) {
-				drawAlertMessage(waitMsg);
 			} else {
-				// appeared = false;
-
 				// Log location of click on board
-				game.updateBoardArray(rowIndex, colIndex, currentTurn.getPiece());
+				game.updateBoardArray(rowIndex, colIndex, currentTurnPlayer.getPiece());
 				game.printBoardArray();
 
 				// Draw current players piece in cell that was clicked
-				drawPiece(clickedCell, currentTurn.getPiece());
+				drawPiece(clickedCell, currentTurnPlayer.getPiece());
 
 				// Check if game was won and in which direction
 				// If game was won, draw line through winning pieces
-				if(game.scanRowWin(rowIndex, currentTurn.getPiece())) {
+				if(game.scanRowWin(rowIndex, currentTurnPlayer.getPiece())) {
 					drawHorizontalLine(rowIndex + 1);
 				}
-				else if(game.scanColWin(colIndex, currentTurn.getPiece())) {
+				else if(game.scanColWin(colIndex, currentTurnPlayer.getPiece())) {
 					drawVerticalLine(colIndex + 1);
 				}
-				else if (game.scanDiagonalWin(rowIndex, colIndex, currentTurn.getPiece())) {
+				else if (game.scanDiagonalWin(rowIndex, colIndex, currentTurnPlayer.getPiece())) {
 					drawDiagonalLine(rowIndex + 1, colIndex + 1);
 				}
 				else if(game.scanForTie()) {
@@ -92,10 +83,10 @@ function main() {
 				// If game is over increment winners score and update scoreboard
 				// Else change turn to opposite player
 				if(game.isGameOver) {
-					currentTurn.setScore(currentTurn.getScore() + 1);
+					currentTurnPlayer.setScore(currentTurnPlayer.getScore() + 1);
 					updateScores();
 					enableNewGameLoserModalButton();
-					$('.outcome').html("Player " + currentTurn._playerNumber + " wins!");
+					$('.outcome').html("Player " + currentTurnPlayer._playerNumber + " wins!");
 					$('.new-game').addClass('new-game-blink');
 				} else {
 					toggleCurrentPiece();
@@ -105,6 +96,10 @@ function main() {
 		}		
 	});
 	
+//////////////////////////////
+//	New Game Modal
+////////////////////////////
+
 	$('.new-game').on('click', function() {
 		$('.new-game-container').css({
 			display: 'block'
@@ -117,7 +112,6 @@ function main() {
 			display: 'none'
 		});
 	});
-
 
 	// Prevent modal closing when clicking on itself
 	$('.new-game-modal').on('click', function() {
@@ -151,7 +145,7 @@ function main() {
 		if(game.isGameOver) {
 			resetGameBoard();
 			$('.outcome').html('');
-			if(currentTurn === player1) {
+			if(currentTurnPlayer === player1) {
 				setTurn(player2);
 			} else {
 				setTurn(player1);
@@ -168,6 +162,11 @@ function main() {
 			display: 'none'
 		});
 	});
+
+
+//////////////////////////////
+//	Clear Scores Modal
+////////////////////////////
 
 	$('.clear-game').on('click', function() {
 		$('.clear-scores-container').css({
@@ -193,6 +192,7 @@ function main() {
 			display: 'none'
 		});
 	});
+
 
 	function drawAlertMessage(message) {
 		$('.alert-message').text(message);
@@ -248,13 +248,13 @@ function main() {
 
 	// Switch to opposite players turn and adjust styling
 	function toggleCurrentPiece() {
-		if(currentTurn === player1) {
+		if(currentTurnPlayer === player1) {
 			setTurn(player2);
 		} else {
 			setTurn(player1);
 		}
 	}
-
+	// Clears board of all pieces and removes win line
 	function resetGameBoard () {
 		game.resetGameBoard();
 		$('.cell').children().remove();
@@ -263,33 +263,36 @@ function main() {
 		}
 	}
 
-	function setTurn(currentTurnPlayer) {
-		currentTurn = currentTurnPlayer;
+	// Changes turn of current player and updates scoreboard CSS to
+	// show whose turn it is
+	function setTurn(player) {
+		currentTurnPlayer = player;
 
 		// Reset scoreboard fontweights
-		if(currentTurnPlayer === player1) {
+		if(player === player1) {
 			$('.' + player1.getTitle() + 'Header').addClass('header-current-turn');
 			$('.' + player2.getTitle() + 'Header').removeClass('header-current-turn');	
 		} else {
 			$('.' + player2.getTitle() + 'Header').addClass('header-current-turn');
 			$('.' + player1.getTitle() + 'Header').removeClass('header-current-turn');
 		}
-
-		// Set scoreboard weight only for selected item
-		// $('.player' + player._playerNumber + 'Header').toggleClass('header-current-turn');
 	}
 
+	// Update scoreboard to reflect players scores
 	function updateScores() {
-		$('.player1Score').text(player1.getScore());
-		$('.player2Score').text(player2.getScore());
+		$('.player1Score').html(player1.getScore());
+		$('.player2Score').html(player2.getScore());
 	}
 
+	// Set both players scores to 0
 	function resetScores() {
 		player1.setScore(0);
 		player2.setScore(0);
 		updateScores();
 	}
 
+	// Button is enabled when there is a winner, otherwise it can't be
+	// used if there is no loser
 	function enableNewGameLoserModalButton() {
 		$('.new-game-loser').removeClass('modal-button-disabled');
 	}
