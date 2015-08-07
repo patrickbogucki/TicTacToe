@@ -28,7 +28,7 @@ function main() {
 		display: 'block'
 	});
 
-	$('.piece-selection-x').on('click', function() {
+	$('.piece-selection-x').parent().on('click', function() {
 		game.setPlayer1Piece = pieceX;
 		game.setPlayer2Piece = pieceO;
 		$('.piece-selection-container').css({
@@ -39,7 +39,7 @@ function main() {
 		currentTurn = player1;
 	});
 
-	$('.piece-selection-o').on('click', function() {
+	$('.piece-selection-o').parent().on('click', function() {
 		game.setPlayer1Piece = pieceO;
 		game.setPlayer2Piece = pieceX;
 		$('.piece-selection-container').css({
