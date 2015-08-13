@@ -2,11 +2,11 @@ body {
   background-color: #232323;
   color: #6287A4;
   font-family: 'Roboto', sans-serif;
-  font-weight: 300; }
+  font-weight: 300;
+  height: 100%; }
 
 .container {
-  text-align: center;
-  min-width: 466px; }
+  text-align: center; }
 
 .scoreboard ul {
   list-style: none;
@@ -25,9 +25,12 @@ body {
     content: '>'; }
 
 .gameTitle {
-  width: auto;
   margin-left: 20px;
   margin-right: 20px; }
+  @media (max-width: 340px) {
+    .gameTitle {
+      opacity: 0;
+      width: 0px !important; } }
 
 .buttons {
   margin-bottom: 10px; }
@@ -59,7 +62,7 @@ body {
   height: 38px; }
 
 .gameboard {
-  width: auto;
+  width: 329px;
   display: inline-block;
   position: relative;
   text-align: center; }
@@ -92,14 +95,14 @@ body {
 
 .diag-line-top {
   position: absolute;
-  left: 8px;
+  left: 17px;
   top: 0px;
   width: 0px;
   transform: rotate(45deg); }
 
 .diag-line-bot {
   position: absolute;
-  left: 3px;
+  left: 11px;
   top: 300px;
   width: 0px;
   transform: rotate(-45deg); }
@@ -185,6 +188,11 @@ body {
   border-radius: 3%;
   box-shadow: 4px 4px 10px 6px rgba(0, 0, 0, 0.2);
   transform: translateZ(10); }
+  @media (max-width: 390px) {
+    .modal {
+      width: 100%;
+      border-radius: 0px;
+      padding: 10px 0px; } }
 
 .modal-title {
   text-align: center; }
