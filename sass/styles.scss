@@ -18,11 +18,12 @@ body {
 	color: #6287A4;
 	font-family: 'Roboto', sans-serif;
 	font-weight: 300;
+	height: 100%;
 }
 
 .container {
 	text-align: center;
-	min-width: 466px;
+	// min-width: 466px;
 }
 
 .scoreboard {
@@ -49,9 +50,12 @@ body {
 }
 
 .gameTitle {
-	width: auto;
 	margin-left: 20px;
 	margin-right: 20px;
+	@media (max-width:  340px) {
+		opacity:  0;
+		width:  0px !important;
+	}
 }
 
 .buttons {
@@ -89,7 +93,7 @@ body {
 }
 
 .gameboard {
-	width: auto;
+	width:  329px;
 	display: inline-block;
 	position: relative;
 	text-align: center;
@@ -128,7 +132,7 @@ body {
 // Diagonal line container used to rotate and prevent change of length of line from moving itself around grid
 .diag-line-top {
 	  position: absolute;
-	  left: 8px;
+	  left: 17px;
 	  top: 0px;
 	  width: 0px;
 	  transform: rotate(45deg); 
@@ -136,7 +140,7 @@ body {
 
 .diag-line-bot {
 	  position: absolute;
-	  left: 3px;
+	  left: 11px;
 	  top: 300px;
 	  width: 0px;
 	  transform: rotate(-45deg); 
@@ -268,6 +272,12 @@ body {
 	border-radius: 3%;
 	box-shadow: 4px 4px 10px 6px rgba(0, 0, 0, 0.2);
 	transform: translateZ(10);
+
+	@media(max-width: 390px) {
+		width: 100%;
+		border-radius: 0px;
+		padding: 10px 0px;
+	}
 }
 
 .modal-title {
