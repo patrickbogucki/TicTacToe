@@ -12,5 +12,5 @@ Game of Tic Tac Toe using only HTML, CSS, JS, and jQuery.
 - Let players choose which game piece they use (DONE)
 - Alternate who starts every new game (DONE - Clicking new game causes the board to reset but the player that would have gone next still goes next)
 - Add animation/transition to modals opening
-- Add confirmation using modal before clearing scores
+- Add confirmation using modal before clearing scores (DONE)
 - Add animation for when a piece is drawn, spinning in X or growing/ bouncing O (DONE)
